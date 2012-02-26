@@ -3,6 +3,10 @@
   "Explicit application function."
   (apply f xs))
 
+(define (id x)
+  "Identity function."
+  x)
+
 (define (compose g f)
   "Compose the functions G and F."
   (lambda args
@@ -12,7 +16,7 @@
   (lambda fxs
     "Compose a variable amount of functions."
     (lambda args
-      (let loop ((fun (lambda (x) x))
+      (let loop ((fun id)
                  (nfxs (reverse fxs)))
         (if (null? nfxs)
           (apply fun args)
