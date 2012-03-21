@@ -5,11 +5,11 @@
 ;; SIMPLIFIER TESTS
 (load "sym.scm")
 
-;; BASIC SIMPLIFICATION RULES
+;; SIMPLIFICATION
     (test 10 (simplify '(/ 10 1)))
     (test 10 (simplify '(* 1 10)))
 
-;; MULTIPLE SIMPLIFICATION RULES
+;; NESTED SIMPLIFICATION
     (test '(+ 10 6) (simplify '(+ (/ 10 1) 6)))
     (test '(+ 10 6) (simplify '(+ (/ 10 (* 1 1)) (* 1 6))))
     (test 6 (simplify '(/ (* 1 (/ 6 1)) (/ 1 1))))
