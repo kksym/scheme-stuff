@@ -2,9 +2,6 @@
 
 (define rules '())
 
-(define (define-rule op sym)
-  (set! rules (append rules (list (cons op sym)))))
-
 (define-syntax define-rule
   (syntax-rules ()
     ((_ (OP . EXPR) BODY ...)
@@ -45,8 +42,9 @@
 (define (simplify expr)
   (apply-rule
     (map (lambda (sub)
-      (let ((nsub (apply-rule sub)))
-        (if (list? nsub)
-          (simplify nsub)
-          nsub))) expr)))
+           (let ((nsub (apply-rule sub)))
+             (if (list? nsub)
+               (simplify nsub)
+               nsub)))
+         expr)))
 
