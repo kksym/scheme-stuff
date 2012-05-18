@@ -8,6 +8,10 @@
                 #(7 2 9)
                 #(8 8 0)))
 
+(define mat2 '#(#(2 2 3)
+                #(1 4 2)
+                #(1 1 2)))
+
 (define (matrix-value m x y)
   "Returns the matrix's value at x,y (Indexing from 0)."
   (vector-ref (vector-ref m y) x))
@@ -29,7 +33,11 @@
                   (vector-map (lambda (_ elem)
                                 (* elem val)) col)) m)))
 
-(define (matrix-add m1 m2) '())
+(define (matrix-add m1 m2)
+  (if (and (matrix? m1) (matrix? m2))
+    (vector-map (lambda (_ r1 r2)
+                  (vector-map (lambda (_ e1 e2)
+                                (+ e1 e2)) r1 r2)) m1 m2)))
 
 (define (matrix-multiply m1 m2) '())
 
