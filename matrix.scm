@@ -27,17 +27,34 @@
           (loop (+ idx 1)))
         #f))))
 
+(define (matrix-rows m)
+  "Returns the number of rows of M."
+  (if (matrix? m)
+    (vector-length m)
+    #f))
+
+(define (matrix-columns m)
+  "Returns the number of columns of M."
+  (if (matrix? m)
+    (vector-length (vector-ref m 0))
+    #f))
+
 (define (matrix-scalar-multiply m val)
+  "Scalar multiplication of M by VAL."
   (if (matrix? m)
     (vector-map (lambda (_ col)
                   (vector-map (lambda (_ elem)
                                 (* elem val)) col)) m)))
 
 (define (matrix-add m1 m2)
-  (if (and (matrix? m1) (matrix? m2))
+  "Add the two matrices M1 and M2 together."
+  (if (and (eq? (matrix-columns m1) (matrix-columns m2))
+           (eq? (matrix-rows m1) (matrix-rows m2)))
     (vector-map (lambda (_ r1 r2)
                   (vector-map (lambda (_ e1 e2)
                                 (+ e1 e2)) r1 r2)) m1 m2)))
 
-(define (matrix-multiply m1 m2) '())
+(define (matrix-multiply m1 m2)
+  "Multiply the matrix M1 by M2."
+  '())
 
