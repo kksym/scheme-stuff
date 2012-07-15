@@ -4,6 +4,12 @@
 ;; matrix.scm
 ;; For dealing with matrices
 
+(define-syntax as-vectors
+  "Nice little hack to turn a list of lists into a vector of vectors."
+  (syntax-rules ()
+    ((_ (n ...) ...)
+     '#(#(n ...) ...))))
+
 (define mat1 '#(#(1 2 3)
                 #(7 2 9)
                 #(8 8 0)))
@@ -53,6 +59,10 @@
     (vector-map (lambda (_ r1 r2)
                   (vector-map (lambda (_ e1 e2)
                                 (+ e1 e2)) r1 r2)) m1 m2)))
+
+(define (matrix-transpose m)
+  "Returns M transposed."
+  '())
 
 (define (matrix-multiply m1 m2)
   "Multiply the matrix M1 by M2."
